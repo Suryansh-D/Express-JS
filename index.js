@@ -52,5 +52,18 @@ app.delete('/courses/:id', (req, res) => {
        courses.splice(index, 1);
        res.send(singleCourse);
 });
+
+function middleware(req, res, next){
+    console.log('middleware function');
+    next();
+}
+//make a logger middleware for method, ip, hostname, date
+    function logger(req, res, next){
+        console.log('Method:', req.method);
+        console.log('IP:', req.ip);
+        console.log('Hostname:', req.hostname);
+        console.log('Date:', new Date());
+        next();
+    }
   
     app.listen(3000, () => console.log('Server is running on port 3000'));
