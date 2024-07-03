@@ -24,6 +24,33 @@ app.post('/courses', (req, res) => {
     res.send(singleCourse);
 });
 
+//put call - > update id1 to spring
+app.put('/courses/:id', (req, res) => {
+try {
+   let singleCourse = course.find((course)=>{
+    return course.id=== +req.params.id;
+   })
+   if(!singleCourse){
+       return res.status(404).send('Course not found');
+   }
+    singleCourse.name = req.body.name;
+    res.send(singleCourse);
+} catch (error) {
+    console.log(error);
+}
+});
 
-
-app.listen(3000, () => console.log('Listening on port 3000...'));
+//delete call - > delete id1
+app.delete('/courses/:id', (req, res) => {
+    let singleCourse = course.find((course)=>{
+        return course.id=== +req.params.id;
+       })
+       if(!singleCourse){
+           return res.status(404).send('Course not found');
+       }
+       let index = courses.indexOf(singleCourse);
+       courses.splice(index, 1);
+       res.send(singleCourse);
+});
+  
+    app.listen(3000, () => console.log('Server is running on port 3000'));
