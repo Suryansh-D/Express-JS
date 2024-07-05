@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
+app.use(logger);
+app.use(middleware);
+
 
 let courses = [
     { id: 1, name: 'course1' },
